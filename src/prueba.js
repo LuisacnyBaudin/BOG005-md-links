@@ -25,7 +25,7 @@ console.log(fs.readdirSync(folderPath));
 statsObj = fs.statSync("README.md");
   
 console.log(statsObj); 
-console.log(chalk.magenta("Path is file:", statsObj.isFile()));
+console.log("Path is file:", statsObj.isFile());
 console.log("Path is directory:", statsObj.isDirectory());
   
 // Getting information for a directory
