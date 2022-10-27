@@ -10,9 +10,10 @@
     "test": "test"
   },
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "marked": "^4.1.1"
   },
-  "scripts":  {
+  "scripts": {
     "test": "jest --env=jsdom--coverage",
     "lint": "eslint --fix",
     "build": "npm run lint && npm run test"
