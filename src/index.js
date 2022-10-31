@@ -2,8 +2,8 @@ const chalk = require('chalk');
 const fs = require('fs')
 const path = require('path');
 const marked = require('marked');
-// const { resolve } = require('path')
-const routeTest = 'test(md)';
+const axios = require('axios')
+const routeTest = 'testmd';
 
 //Convertir la ruta de relativa a absolut
 const processPath = process.argv[2];
@@ -73,6 +73,10 @@ const readMd = (file) => {
     });
   })  
 }  
+const getAllobjects = (arraysMD) => {
+const returnPromise= arraysMD.map(file => readMd(file));
+return Promise.all(returnPromise).then(res => res);
+}
 
 // readMd(processPath).then((val) => { console.log("probando", val) })
 
@@ -81,12 +85,12 @@ const markDownLinks = (Path, option) => {
   return new Promise((resolve, reject) => {
     const verifyAbsolut = pathAbsolute(Path);
     const containerArray = getMDfiles(verifyAbsolut);
-    const readMarkdown = readMd(containerArray);
+    const readMarkdown = getAllobjects(containerArray);
     resolve(readMarkdown)
   })
 }
 
-markDownLinks(routeTest).then((data) => {
+markDownLinks(processPath).then((data) => {
   console.log("si sirve", data);
 });
 //prueba subir readme. 
