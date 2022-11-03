@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path');
 const marked = require('marked');
 const axios = require('axios');
+const { fail } = require('assert');
 const routeTest = 'testmd';
 
 //Convertir la ruta de relativa a absolut
@@ -119,18 +120,18 @@ function processLink(link) {
     }
   }
   
-  console.log(statsLinks(containerArray));
+//   console.log(statsLinks(containerArray));
   
   
   function statsValidatelinks (links) {
    
-    const failes = links.filter(link => link.ok == 'fail').length
+    const failes = links.filter(link => link.ok == '🚫').length
   
-    console.log( {
-        Total: links.length,
-        Unique: new Set(links.map((link) => link.href)).size,
-        Broken: failes
-    })
+    // console.log( {
+    //     Total: links.length,
+    //     Unique: new Set(links.map((link) => link.href)).size,
+    //     Broken: failes
+    // })
     return {
         Total: links.length,
         Unique: new Set(links.map((href) => href)).size,
@@ -138,7 +139,7 @@ function processLink(link) {
     }
   }
   
-  console.log(statsValidatelinks(containerArray));
+//   console.log(statsValidatelinks(containerArray));
   
 
 module.exports= {getAllobjects, getvalidateLinks, pathAbsolute, getMDfiles, readMd, processLink, statsLinks,statsValidatelinks }
