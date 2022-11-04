@@ -5,7 +5,7 @@ const fs = require('fs')
 const path = require('path');
 const routeTest = 'testmd';
   
-   const markDownLinks = (Path, option={validate:false}) => {
+   const markDownLinks = (Path, option={validate:true}) => {
    return new Promise((resolve, reject) => {
     const verifyAbsolut = pathAbsolute(Path);
     const containerArray = getMDfiles(verifyAbsolut);
