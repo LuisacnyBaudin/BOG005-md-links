@@ -1,4 +1,4 @@
-const mocksData = {
+const mocksDataResult = {
 
     filePath: 'C:/Users/Usuario/BOG005-md-links/testmd',
     validateFalse : 
@@ -92,10 +92,10 @@ const mocksData = {
       ],
     
 
-    statsData: { Total: 2, Unique: 1 },
-    statsAndValidateData: { Total: 2, Unique: 1, Broken: 1 }
+      statsLinksMocks: { Total: 8, Unique: 5 },
+      statsValidatelinksMocks: { Total: 8, Unique: 5, Broken: 3 }
   }
   
   module.exports = {
-    mocksData
+    mocksDataResult
   }
