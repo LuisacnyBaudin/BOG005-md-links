@@ -1,10 +1,10 @@
-const mdLinks = require('../');
-
+const { pathAbsolute, getMDfiles, getAllobjects, getvalidateLinks} = require('../src/function.js')
+const {markDownLinks} = require('../src/index.js')
 
 describe('mdLinks', () => {
 
   it('should...', () => {
-    console.log('FIX ME!');
+    console.log('');
   });
 
 });

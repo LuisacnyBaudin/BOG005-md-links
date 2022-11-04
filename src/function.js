@@ -11,13 +11,13 @@ const routeTest = 'testmd';
 // const processPath = process.argv[2];
 
 const pathAbsolute = (route) => {
-        if (path.isAbsolute(route)) {
-            return route;
-        } else {
-            return path.resolve(route).normalize();
-        }
-    };
-    // console.log("verificando path", pathAbsolute(routeTest));
+  if (path.isAbsolute(route)) {
+    return route;
+  } else {
+    return path.resolve(route).normalize();
+  }
+};
+// console.log("verificando path", pathAbsolute(routeTest));
 
 function getMDfiles(allFileMD) {
   const isFile = fs.statSync(allFileMD).isFile();
@@ -69,14 +69,14 @@ const readMd = (file) => {
       }
       marked.marked(datafile,
         { renderer })
-      
+
       resolve(arrayObjects);
     });
-  })  
-}  
+  })
+}
 const getAllobjects = (arraysMD) => {
-const returnPromise= arraysMD.map(file => readMd(file));
-return Promise.all(returnPromise).then(res => res.flat());
+  const returnPromise = arraysMD.map(file => readMd(file));
+  return Promise.all(returnPromise).then(res => res.flat());
 }
 // readMd(processPath).then((val) => { console.log("probando", val) })
 
@@ -84,62 +84,56 @@ function processLink(link) {
   return new Promise((resolve, reject) => {
     axios.get(link.href)
       .then((response) => {
-        if(response.status >= 200 && response.status < 400){
-        link.status = response.status
-        link.ok = '✅';
-        resolve(link);
-         }
-      }) .catch((error) => {
-        let status = 500; 
-        if(error.response){
-          status = error.response.status
-        }else if(error.request){
-          status = 503;
+        if (response.status >= 200 && response.status < 400) {
+          link.status = response.status
+          link.ok = '✅';
+          resolve(link);
         }
-        link.status = error.status
+      }).catch((error) => {
+        link.status = (error.name , "Please,check the link");
         link.ok = '🚫';
         resolve(link);
-      }); 
-    })
-    
+      });
+  })
+
 }
-  const getvalidateLinks = (validateLinks) => {
-    let returnValidateLinks= validateLinks.map(link => processLink(link));
+const getvalidateLinks = (validateLinks) => {
+  let returnValidateLinks = validateLinks.map(link => processLink(link));
   return Promise.all(returnValidateLinks).then(res => res);
-  }
+}
 
-  function statsLinks (links) {
-    // console.log({
-    //     Total: links.length,
-    //     Unique: new Set(links.map((link) => link.href)).size
-    // })
-    return {
-        Total: links.length,
-        Unique: new Set(links.map((link) => link.href)).size
-        
-    }
+function statsLinks(links) {
+  // console.log({
+  //     Total: links.length,
+  //     Unique: new Set(links.map((link) => link.href)).size
+  // })
+  return {
+    Total: links.length,
+    Unique: new Set(links.map((link) => link.href)).size
+
   }
-  
+}
+
 //   console.log(statsLinks(containerArray));
-  
-  
-  function statsValidatelinks (links) {
-   
-    const failes = links.filter(link => link.ok == '🚫').length
-  
-    // console.log( {
-    //     Total: links.length,
-    //     Unique: new Set(links.map((link) => link.href)).size,
-    //     Broken: failes
-    // })
-    return {
-        Total: links.length,
-        Unique: new Set(links.map((href) => href)).size,
-        Broken: failes
-    }
-  }
-  
-//   console.log(statsValidatelinks(containerArray));
-  
 
-module.exports= {getAllobjects, getvalidateLinks, pathAbsolute, getMDfiles, readMd, processLink, statsLinks,statsValidatelinks }
+
+function statsValidatelinks(links) {
+
+  const failes = links.filter(link => link.ok == '🚫').length
+
+  // console.log( {
+  //     Total: links.length,
+  //     Unique: new Set(links.map((link) => link.href)).size,
+  //     Broken: failes
+  // })
+  return {
+    Total: links.length,
+    Unique: new Set(links.map((link) => link.href)).size,
+    Broken: failes
+  }
+}
+
+//   console.log(statsValidatelinks(containerArray));
+
+
+module.exports = { getAllobjects, getvalidateLinks, pathAbsolute, getMDfiles, readMd, processLink, statsLinks, statsValidatelinks }
