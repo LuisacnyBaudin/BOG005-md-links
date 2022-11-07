@@ -24,7 +24,7 @@ console.log(fs.readdirSync(folderPath));
 
 
 // Getting information for a file
-statsObj = fs.statSync("README.md");
+statsObj = fs.statSync("testmd");
   
 console.log(statsObj); 
 console.log("Path is file:", statsObj.isFile());
