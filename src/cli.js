@@ -2,9 +2,14 @@
 const chalk = require('chalk');
 const { markDownLinks } = require('./index.js')
 const { statsValidatelinks, statsLinks } = require('./function.js')
+const figlet = require('figlet')
 
 const argv = process.argv
 const MDvalidate = process.argv[2]
+
+console.log( chalk.cyanBright(figlet.textSync('markDownLinks')));
+ 
+    
 
 function commandLine(MDvalidate, argv) {
     if (argv[3] === '--stats' && argv[4] === '--validate' || argv[4] === '--stats' && argv[3] === '--validate') {
@@ -14,7 +19,7 @@ function commandLine(MDvalidate, argv) {
             console.log(chalk.red("Please,check the path", reject));
         })
     } else if (argv[3] === '--validate') {
-        (markDownLinks(MDvalidate, { validate: true }).then((response) => {
+        (markDownLinks(MDvalidate, { validate:true}).then((response) => {
             console.log(response)
         })).catch(reject => {
             console.log(chalk.red("The file or directory does not exist", reject));
