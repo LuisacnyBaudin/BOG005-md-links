@@ -40,7 +40,7 @@ npm i luisacnybaudin-md-links
 
 
 This is the function you will use:
-##### `mdLinks(path, options)`
+##### `markDownLinks(path, options)`
 
 * `path`: *absolute* or *relative* route to the *file* or *directory*.
 * `options`: An object with only this property:
@@ -62,42 +62,42 @@ With `validate:true` :
 
 Examples (results as comments):
 ```js
-const {mdLinks} = require("luisacnybaudin-md-links");
+const {markDownLinks} = require("luisacnybaudin-md-links");
 
-mdLinks("./some/example.md", { validate: false })
+markDownLinks("./some/example.md", { validate: false })
   .then(links => console.log(links)
     // => [{ href, text, file }, ...]
   )
   .catch(console.error);
 
-mdLinks("./some/example.md", { validate: true })
+markDownLinks("./some/example.md", { validate: true })
   .then(links => console.log(links)
     // => [{ href, text, file, status, ok }, ...]
   )
   .catch(console.error);
 
-mdLinks("./some/dir", { validate: false })
+markDownLinks("./some/dir", { validate: false })
   .then(links => console.log(links)
     // => [{ href, text, file }, ...]
   )
   .catch(console.error);
 
-mdLinks("./some/dir", { validate: true })
+markDownLinks("./some/dir", { validate: true })
   .then(links => console.log(links)
     // => [{ href, text, file, status, ok }, ...]
   )
   .catch(console.error);
 ```
 
-### 2.2 CLI
+###  CLI
 
 This is the way you can use the executable file by the command line:
 
-`md-links <path-to-file> [options]`
+`markdownlinks <path-to-file> [options]`
 
 An example:
 ```sh
-$ md-links ./some/example.md
+$ markdownlinks ./some/example.md
 ./some/example.md http://something.com/2/3/ Link to something
 ./some/example.md https://otra-cosa.net/any-doc.html any doc
 ./some/example.md http://google.com/ Google
@@ -109,7 +109,7 @@ $ md-links ./some/example.md
 
 An example:
 ```sh
-$ md-links ./some/example.md --validate
+$ markdownlinks ./some/example.md --validate
 ./some/example.md http://something.com/2/3/ ok 200 Link to something
 ./some/example.md https://otra-cosa.net/any-doc.html fail 404 any doc
 ./some/example.md http://google.com/ ok 301 Google
@@ -119,7 +119,7 @@ $ md-links ./some/example.md --validate
 
 An example:
 ```sh
-$ md-links ./some/example.md --stats
+$ markdownlinks ./some/example.md --stats
 Total: 3
 Unique: 3
 ```
@@ -128,14 +128,14 @@ Also you can use both `--stats` and `--validate` (it does not matter the order).
 
 Examples:
 ```sh
-$ md-links ./some/example.md --stats --validate
+$ markdownlinks ./some/example.md --stats --validate
 Total: 3
 Unique: 3
 Broken: 1
 ```
 
 ```sh
-$ md-links ./some/example.md --validate --stats
+$ markdownlinks ./some/example.md --validate --stats
 Total: 3
 Unique: 3
 Broken: 1
