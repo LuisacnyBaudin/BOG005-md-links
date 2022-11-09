@@ -20,9 +20,9 @@ const routeTest = 'testmd';
   })
 }
 
-markDownLinks(routeTest).then((data) => {
-  console.log(("si sirve", data));
-});
+// markDownLinks(routeTest).then((data) => {
+//   console.log(("si sirve", data));
+// });
 
 
 module.exports= {markDownLinks};

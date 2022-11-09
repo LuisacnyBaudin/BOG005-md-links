@@ -4,10 +4,10 @@ const fs = require('fs')
 const path = require('path');
 const marked = require('marked');
 const axios = require('axios');
-const { fail } = require('assert');
+// const { fail } = require('assert');
 const routeTest = 'testmd';
 
-//Convertir la ruta de relativa a absolut
+//Convertir la ruta de relativa a absoluta
 // const processPath = process.argv[2];
 
 const pathAbsolute = (route) => {
@@ -49,6 +49,8 @@ function getMDfiles(allFileMD) {
 }
 
 const containerArray = getMDfiles(routeTest);
+
+// console.log(containerArray)
 
 const readMd = (file) => {
   // "[hola](test) l l ll ll l ll [hola2](test2)".match(/\[([^\[\]]*)\]\((.*?)\)/g)
