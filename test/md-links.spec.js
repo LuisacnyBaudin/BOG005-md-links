@@ -66,7 +66,7 @@ describe('getvalidateLinks', () => {
       });
   });
   it('Debería validar el estado de los links rechazados', (done) => {
-    axios.get.mockRejectedValueOnce('Please,check the link');
+    axios.get.mockRejectedValue('Please,check the link');
 
     const linksError = [
       {
@@ -93,7 +93,7 @@ const arrayFalse=
     {
       href: 'https://es.wikipedia.org/wiki/Markdown',
       text: 'Markdown',
-      file: 'C\\Users\\Usuario\\BOG005-md-links\\testmd\\archivos.md'
+      file: 'C:\\Users\\Usuario\\BOG005-md-links\\testmd\\archivos.md'
     },
 
   ]

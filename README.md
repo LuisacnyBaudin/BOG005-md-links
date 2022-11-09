@@ -93,11 +93,11 @@ markDownLinks("./some/dir", { validate: true })
 
 This is the way you can use the executable file by the command line:
 
-`markdownlinks <path-to-file> [options]`
+`md-links <path-to-file> [options]`
 
 An example:
 ```sh
-$ markdownlinks ./some/example.md
+$ md-links ./some/example.md
 ./some/example.md http://something.com/2/3/ Link to something
 ./some/example.md https://otra-cosa.net/any-doc.html any doc
 ./some/example.md http://google.com/ Google
@@ -109,7 +109,7 @@ $ markdownlinks ./some/example.md
 
 An example:
 ```sh
-$ markdownlinks ./some/example.md --validate
+$ md-links ./some/example.md --validate
 ./some/example.md http://something.com/2/3/ ok 200 Link to something
 ./some/example.md https://otra-cosa.net/any-doc.html fail 404 any doc
 ./some/example.md http://google.com/ ok 301 Google
@@ -119,7 +119,7 @@ $ markdownlinks ./some/example.md --validate
 
 An example:
 ```sh
-$ markdownlinks ./some/example.md --stats
+$ md-links ./some/example.md --stats
 Total: 3
 Unique: 3
 ```
@@ -128,14 +128,14 @@ Also you can use both `--stats` and `--validate` (it does not matter the order).
 
 Examples:
 ```sh
-$ markdownlinks ./some/example.md --stats --validate
+$ md-links ./some/example.md --stats --validate
 Total: 3
 Unique: 3
 Broken: 1
 ```
 
 ```sh
-$ markdownlinks ./some/example.md --validate --stats
+$ md-links ./some/example.md --validate --stats
 Total: 3
 Unique: 3
 Broken: 1

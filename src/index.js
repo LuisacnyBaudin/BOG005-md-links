@@ -3,7 +3,7 @@ const { pathAbsolute, getMDfiles, getAllobjects, getvalidateLinks} = require('./
 const chalk = require('chalk');
 const fs = require('fs')
 const path = require('path');
-const routeTest = 'testmd';
+// const routeTest = 'testmd';
   
    const markDownLinks = (Path, option = {validate:false}) => {
    return new Promise((resolve, reject) => {
