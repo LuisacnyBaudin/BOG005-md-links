@@ -7,7 +7,7 @@
   "description": "",
   "main": "src/index.js",
   "bin":{
-    "md-links":"src/cli.js"
+    "md-links":"./src/cli.js"
   },
   "directories": {
     "test": "./test"
