@@ -1,18 +1,17 @@
 const { pathAbsolute, getMDfiles, getAllobjects, getvalidateLinks, readMd, processLink} = require('../src/function.js')
 const { markDownLinks } = require('../src/index.js')
-const { mocksDataResult } = require('./datamocks.spec')
 const  axios  = require('axios');
 jest.mock('axios');
 
 describe("pathAbsolute", () => {
-  it("deberia ser una funcion", () => {
+  it("should be a function", () => {
     expect(typeof pathAbsolute).toBe("function");
   })
 })
-it("si recibe una ruta absoluta, muestra esa ruta nuevamente", () => {
+it("if it receives an absolute path, it displays that path again", () => {
   expect(pathAbsolute("C:/Users/Usuario/BOG005-md-links/testmd")).toEqual("C:/Users/Usuario/BOG005-md-links/testmd");
 })
-it("si recibe una ruta relativa, la convierte en absoluta", () => {
+it("if it receives a relative path, it converts it to absolute", () => {
   expect(pathAbsolute("testmd")).toEqual("C:\\Users\\Usuario\\BOG005-md-links\\testmd");
 })
 
@@ -23,7 +22,7 @@ const getmdFilesData = [
 ];
 
 describe('getMdfiles', () => {
-  it('Debería ser una función', () => {
+  it('should be a function', () => {
     expect(typeof getMDfiles).toBe('function');
   });
   it('Deberia retornar las rutas incluyendo si hay mas carpetas', () => {
@@ -36,11 +35,7 @@ const arrayURL = [
     text: 'Markdown',
     file: 'C://Users//Usuario//BOG005-md-links//testmd//archivos.md'
   },
-  {
-    href: 'https://nodejs.org/',
-    text: 'Node.js',
-    file: 'C://Users//Usuario//BOG005-md-links//testmd//archivos.md'
-  }
+  
 ]
 
 const arrayLinksError = [
@@ -62,13 +57,7 @@ describe('getvalidateLinks', () => {
         status: 200,
         ok: '✅'
       },
-      {
-        href: 'https://nodejs.org/',
-        text: 'Node.js',
-        file: 'C://Users//Usuario//BOG005-md-links//testmd//archivos.md',
-        status: 200,
-        ok: '✅'
-      }
+    
     ];
     getvalidateLinks(arrayURL)
       .then((data) => {
@@ -77,7 +66,7 @@ describe('getvalidateLinks', () => {
       });
   });
   it('Debería validar el estado de los links rechazados', (done) => {
-    axios.get.mockRejectedValueOnce('Please,check the link');
+    axios.get.mockRejectedValue('Please,check the link');
 
     const linksError = [
       {
@@ -96,4 +85,52 @@ describe('getvalidateLinks', () => {
       });
   });
 
+});
+
+const arrayFalse=
+  [
+    
+    {
+      href: 'https://es.wikipedia.org/wiki/Markdown',
+      text: 'Markdown',
+      file: 'C:\\Users\\Usuario\\BOG005-md-links\\testmd\\archivos.md'
+    },
+
+  ]
+  
+  const arrayTrue=[
+    {
+      href: 'https://es.wikipedia.org/wiki/Markdown',
+      text: 'Markdown',
+      file: 'C:\\Users\\Usuario\\BOG005-md-links\\testmd\\archivos.md',
+      status: 200,
+      ok: '✅'
+    },
+  
+    
+  ]
+describe('markDownLinks', () => {
+  it('should be a function', () => {
+    expect(typeof markDownLinks).toBe('function');
+  });
+
+  it('It should return the message: E    R     R    O     R.    please check again!!', (done)=>{
+    const resolveData = markDownLinks(' ');
+    resolveData.then((res)=> expect(res).toStrictEqual('E    R     R    O     R.    please check again!!')).catch((rej)=>rej);
+    done();
+  });
+
+
+  it('Debería retornar en un array de objetos con href, text y file', (done) => {
+    const resolveDataFalse = markDownLinks(('testmd'));
+    resolveDataFalse.then((res) => expect(res).toEqual(arrayFalse));
+    done();
+  });
+
+  it('Debería retornar en un array de objetos con href, text, file, status y ok', (done) => {
+    const resolveDataTrue = markDownLinks(('testmd'), { validate: true });
+    resolveDataTrue.then((res) => expect(res).toEqual(arrayTrue));
+    done();
+  });
+  
 });
