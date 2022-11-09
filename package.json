@@ -1,13 +1,13 @@
 {
   "name": "luisacnybaudin-md-links",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "node": ">=12.x"
   },
   "description": "",
   "main": "src/index.js",
   "bin":{
-    "md-links":"src/cli.js"
+    "md-links":"./src/cli.js"
   },
   "directories": {
     "test": "./test"
